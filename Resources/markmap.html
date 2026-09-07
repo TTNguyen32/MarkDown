@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+<style>
+  html, body { margin: 0; height: 100%; background: transparent; }
+  #mm { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<svg id="mm"></svg>
+
+<!-- Populated by ./Scripts/fetch-vendor.sh (Resources/vendor/) -->
+<script src="vendor/d3.min.js"></script>
+<script src="vendor/markmap-view.min.js"></script>
+<script src="vendor/markmap-lib.min.js"></script>
+
+<script type="text/template" id="src">%%MARKDOWN%%</script>
+<script>
+  (function () {
+    var md = document.getElementById('src').textContent;
+    try {
+      var t = new markmap.Transformer();
+      var out = t.transform(md);
+      markmap.Markmap.create('#mm', { spacingVertical: 6, paddingX: 16 }, out.root);
+    } catch (e) {
+      document.body.innerHTML =
+        '<pre style="font:14px -apple-system;padding:1rem;white-space:pre-wrap">' +
+        String(e) + '\n\nCheck that vendor/*.js loaded.</pre>';
+    }
+  })();
+</script>
+</body>
+</html>

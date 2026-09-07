@@ -1,0 +1,12 @@
+# Xcode / build
+*.xcodeproj
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+
+# Generated / fetched
+Resources/vendor/
+
+# macOS
+.DS_Store
