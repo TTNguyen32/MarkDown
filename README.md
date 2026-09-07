@@ -19,9 +19,9 @@ want the exact wording (a definition, a quotable line).
 
 ## Requirements
 
-- Xcode 15+, iOS 17 SDK (SwiftData + Observation).
-- [XcodeGen](https://github.com/yonyz/XcodeGen) to generate the project:
-  `brew install xcodegen`
+- Xcode 16+, iOS 17 SDK (SwiftData + Observation). The checked-in `.xcodeproj`
+  uses file-system-synchronized groups (Xcode 16), so new files under `Sources/`
+  are picked up automatically — no project regeneration step.
 - An Anthropic API key (Settings → paste key). This is the "solo / TestFlight"
   path — see `ARCHITECTURE.md` for the hosted-proxy plan before any public release.
 
@@ -29,14 +29,16 @@ want the exact wording (a definition, a quotable line).
 
 ```bash
 cd MarkDown
-./Scripts/fetch-vendor.sh      # downloads d3 + markmap into Resources/vendor/
-xcodegen generate
+./Scripts/fetch-vendor.sh      # downloads d3 + markmap into Resources/
 open MarkDown.xcodeproj
 ```
 
-Set `DEVELOPMENT_TEAM` in `project.yml` (or the target's Signing tab). If you are
-not using iCloud sync, delete the `entitlements` block from `project.yml` and
+Then set your **Team** on the target's Signing & Capabilities tab (or
+`DEVELOPMENT_TEAM` in the target build settings). If you are not using iCloud
+sync, remove `CODE_SIGN_ENTITLEMENTS` from the target build settings and delete
 `Resources/MarkDown.entitlements`.
+
+Command line: `xcodebuild -scheme MarkDown -destination 'generic/platform=iOS Simulator' build`.
 
 ## Layout
 
@@ -50,8 +52,12 @@ Sources/
     Outline/   TOC import, page ingest, page-range placement
     Export/    Markdown / markmap serialisers
   Views/       Library, AddBook, BookDetail, OutlineTree, Mindmap, ScanFlow, Settings
-Resources/     Info.plist, entitlements, markmap.html, vendor/ (gitignored)
+Resources/     Info.plist, entitlements, markmap.html, d3/markmap *.min.js (gitignored)
 ```
+
+The `.xcodeproj` is hand-written and small: two synchronized groups (`Sources`,
+`Resources`) feeding one app target, plus Debug/Release configs and a shared
+scheme. Adding a Swift file = just create it under `Sources/`.
 
 ## Status
 

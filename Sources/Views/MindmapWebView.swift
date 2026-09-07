@@ -1,8 +1,9 @@
 import SwiftUI
 import WebKit
 
-/// Renders Markdown as an interactive markmap. `markmap.html` + `vendor/*.js`
-/// are bundled resources; `./Scripts/fetch-vendor.sh` populates `vendor/`.
+/// Renders Markdown as an interactive markmap. `markmap.html` and the d3 /
+/// markmap `*.min.js` files are bundled resources; `./Scripts/fetch-vendor.sh`
+/// downloads the JS into `Resources/`.
 struct MindmapWebView: UIViewRepresentable {
     let markdown: String
 

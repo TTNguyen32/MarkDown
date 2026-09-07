@@ -11,10 +11,10 @@
 <body>
 <svg id="mm"></svg>
 
-<!-- Populated by ./Scripts/fetch-vendor.sh (Resources/vendor/) -->
-<script src="vendor/d3.min.js"></script>
-<script src="vendor/markmap-view.min.js"></script>
-<script src="vendor/markmap-lib.min.js"></script>
+<!-- Populated by ./Scripts/fetch-vendor.sh into Resources/ (copied flat into the bundle). -->
+<script src="d3.min.js"></script>
+<script src="markmap-view.min.js"></script>
+<script src="markmap-lib.min.js"></script>
 
 <script type="text/template" id="src">%%MARKDOWN%%</script>
 <script>
@@ -27,7 +27,7 @@
     } catch (e) {
       document.body.innerHTML =
         '<pre style="font:14px -apple-system;padding:1rem;white-space:pre-wrap">' +
-        String(e) + '\n\nCheck that vendor/*.js loaded.</pre>';
+        String(e) + '\n\nCheck that d3 / markmap scripts loaded.</pre>';
     }
   })();
 </script>

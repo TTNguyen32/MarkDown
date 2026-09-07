@@ -1,12 +1,15 @@
-# Xcode / build
-*.xcodeproj
-DerivedData/
+# Xcode build output
 build/
+DerivedData/
 *.xcuserstate
 xcuserdata/
+*.xcscmblueprint
+*.moved-aside
 
-# Generated / fetched
-Resources/vendor/
+# Fetched markmap runtime (run Scripts/fetch-vendor.sh)
+Resources/d3.min.js
+Resources/markmap-lib.min.js
+Resources/markmap-view.min.js
 
 # macOS
 .DS_Store
